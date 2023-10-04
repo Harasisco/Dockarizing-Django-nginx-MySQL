@@ -31,7 +31,7 @@ Make sure you have the following prerequisites installed on your system:
 2. Create your own docker network:
 
 ```shell
-  docker network create <Name of the network>  ## I will call it test
+  docker network create test
 ```
 
 3. Build the Django Docker image:
