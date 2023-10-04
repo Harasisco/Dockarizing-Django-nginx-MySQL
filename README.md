@@ -56,9 +56,13 @@ docker run -d --name nginx -p 80:80 -v ./nginx/conf.d/:/etc/nginx/conf.d/ --net 
 
   - Firstly execute the MySQL container using:
     ```shell
-        docker exec -it <container ID>  /bin/bash
+    docker exec -it <container ID>  /bin/bash
     ```
   - Secondery check the MySQL data base info:
     ```shell
-        
+    mysql -p
+    > show databases;
+    > use my_database;
+    > 
+    
     ```
