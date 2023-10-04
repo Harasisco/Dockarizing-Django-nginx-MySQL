@@ -91,7 +91,7 @@ docker run -d --name nginx -p 80:80 -v ./nginx/conf.d/:/etc/nginx/conf.d/ --net 
 
 <p> I've included a Docker Compose file (docker-compose.yml) in this project to simplify the setup process and manage the different containers required for our Django application, MySQL database, and Nginx reverse proxy. Docker Compose allows you to define and run multi-container Docker applications with ease.</p>
 
-**Note:** I encountered some errors while using the compose file becouse of depends-on between files that the Django server will not work if the MySQL container not working correctly so I wrote a python script to handle these errors, if You have another solutions please tell me.
+**Note:** I encountered some errors while using the compose file becouse of depends-on between files that the Django server will not work if the MySQL container not working correctly so I wrote a python script to handle these errors, if You have another solution please tell me.
 
 ### To use it Follow these commands:
 
