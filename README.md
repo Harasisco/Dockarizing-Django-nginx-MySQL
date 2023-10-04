@@ -60,9 +60,21 @@ docker run -d --name nginx -p 80:80 -v ./nginx/conf.d/:/etc/nginx/conf.d/ --net 
     ```
   - Secondery check the MySQL data base info:
     ```shell
-    mysql -p
+    $ mysql -p
     > show databases;
     > use my_database;
-    > 
-    
+    > show tables
     ```
+   - You will see that No tables shown.
+     
+   - In a new tab execute the Django container same as the MySQL container, then:
+     ```shell
+     cd mysite/
+     python manage.py migrate
+     ```
+   - Finally, Go back to the MySQL tab and rerun the ``` show tables; ``` command to figoure out that the Django container and MySQL container are linked correctly.
+
+##Configuration
+- Django settings can be configured in the /django/mysite/settings.py file.
+- MySQL configuration is set in the /django/.env file.
+- Nginx configuration files can be added/modified in the ./nginx/conf.d/ directory.
