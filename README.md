@@ -58,7 +58,7 @@ docker run -d --name web -v ./django:/code/ --net test --env-file ./django/.env 
 docker run -d --name nginx -p 80:80 -v ./nginx/conf.d/:/etc/nginx/conf.d/ --net test --link web nginx:latest 
 ```
 
-7. Access your Django application in your web browser to check the server type by navigating to http://localhost or using the IP 127.0.0.1.
+7. Access your Django application in your web browser by navigating to http://localhost or using the IP 127.0.0.1.
 
 
 ## Check The Connectivity
