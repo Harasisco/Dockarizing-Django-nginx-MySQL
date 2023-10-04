@@ -1,6 +1,16 @@
 # Dockerized Django, MySQL, and Nginx Setup
 
-This repository contains a Dockerized setup for running a Django web application with a MySQL database and an Nginx reverse proxy. This setup allows you to easily manage and deploy your Django application in a containerized environment.
+![image](https://github.com/Harasisco/Dockerize_Python_djangoApp/assets/87074807/b15a2d24-d23a-4f7f-bd83-76cb69bfbb72 )
+
+<p>This repository contains a Dockerized setup for running a Django web application with a MySQL database and an Nginx reverse proxy. This setup allows you to easily manage and deploy your Django application in a containerized environment.</p>
+
+## Table of Contents
+
+- [Prerequisites](#prerequisites)
+- [Getting Started](#getting-started)
+- [Check The Connectivity](#check-the-connectivity)
+- [Compose File](#compose-file)
+- [Configuration](#configuration)
 
 ## Prerequisites
 
@@ -50,9 +60,12 @@ docker run -d --name nginx -p 80:80 -v ./nginx/conf.d/:/etc/nginx/conf.d/ --net 
 
 7. Access your Django application in your web browser to check the server type by navigating to http://localhost or using the IP 127.0.0.1.
 
+
+## Check The Connectivity
+
 ![image](https://github.com/Harasisco/Dockarizing-Django-nginx-MySQL/assets/87074807/84bd4199-694d-4f8a-ab8f-970bbcab51e2)
 
-8. To check the MySQL connectivity:
+### To check the MySQL connectivity:
 
   - Firstly execute the MySQL container using:
     ```shell
@@ -67,14 +80,31 @@ docker run -d --name nginx -p 80:80 -v ./nginx/conf.d/:/etc/nginx/conf.d/ --net 
     ```
    - You will see that No tables shown.
      
-   - In a new tab execute the Django container same as the MySQL container, then:
+   - In a new tab execute the Django container same as what we did with the MySQL container, then:
      ```shell
      cd mysite/
      python manage.py migrate
      ```
    - Finally, Go back to the MySQL tab and rerun the ``` show tables; ``` command to figoure out that the Django container and MySQL container are linked correctly.
 
-##Configuration
-- Django settings can be configured in the /django/mysite/settings.py file.
-- MySQL configuration is set in the /django/.env file.
+## Compose File
+
+<p> I've included a Docker Compose file (docker-compose.yml) in this project to simplify the setup process and manage the different containers required for our Django application, MySQL database, and Nginx reverse proxy. Docker Compose allows you to define and run multi-container Docker applications with ease.</p>
+
+**Note:** I encountered some errors while using the compose file becouse of depends-on between files that the Django server will not work if the MySQL container not working correctly so I wrote a python script to handle these errors, if You have another solutions please tell me.
+
+### To use it Follow these commands:
+
+```shell
+docker compose build
+docker compose up
+```
+And when You finsh press ``` Ctrl + C ``` and
+```shell
+docker compose down
+```
+
+## Configuration
+- Django settings can be configured in the ./django/mysite/settings.py file.
+- MySQL configuration is set in the ./docker-compose.yml file under the db service section.
 - Nginx configuration files can be added/modified in the ./nginx/conf.d/ directory.
