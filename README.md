@@ -43,19 +43,19 @@ docker build -t django_image ./django
 4. Start the MySQL container:
 
 ```shell
-docker run -d --name db --hostname=db_net --ip 10.0.0.15  -v ./MySQL/data.sql:/docker-entrypoint-initdb.d/data.sql --net test -e MYSQL_ROOT_PASSWORD=harasisco -e MYSQL_DATABASE=my_database mysql
+docker run -d --name db --hostname=MySQL --ip 10.0.0.15  -v ./MySQL/data.sql:/docker-entrypoint-initdb.d/data.sql --net test -e MYSQL_ROOT_PASSWORD=harasisco -e MYSQL_DATABASE=my_database mysql
 ```
 
 5. Start the Django container:
 
 ```shell
-docker run -d --name web --hostname=web_net --ip 10.0.0.10 -v ./django:/code/ --net test --env-file ./django/.env --expose 8000 --link db django_image python3 /code/mysite/manage.py runserver 0.0.0.0:8000
+docker run -d --name web --hostname=Django_server --ip 10.0.0.10 -v ./django:/code/ --net test --env-file ./django/.env --expose 8000 --link db django_image python3 /code/mysite/manage.py runserver 0.0.0.0:8000
 ```
 
 6. Start the Nginx container:
 
 ```shell
-docker run -d --name nginx --hostname=nginx_net --ip 10.0.0.5  -p 80:80 -v ./nginx/conf.d/:/etc/nginx/conf.d/ --net test --link web nginx:latest 
+docker run -d --name nginx --hostname=nginx_REVproxy --ip 10.0.0.5  -p 80:80 -v ./nginx/conf.d/:/etc/nginx/conf.d/ --net test --link web nginx:latest 
 ```
 
 7. Access your Django application in your web browser by navigating to http://localhost or using the IP 127.0.0.1.
@@ -71,7 +71,7 @@ docker run -d --name nginx --hostname=nginx_net --ip 10.0.0.5  -p 80:80 -v ./ngi
 $ docker exec -it <container ID> /bin/bash
 ```
 ```shell
-root@web_net:/code# ping nginx_net
+root@Django_server:/code# ping nginx_REVproxy
 PING nginx_net (10.0.0.5) 56(84) bytes of data.
 64 bytes from nginx.test (10.0.0.5): icmp_seq=1 ttl=64 time=0.174 ms
 64 bytes from nginx.test (10.0.0.5): icmp_seq=2 ttl=64 time=0.066 ms
