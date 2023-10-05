@@ -65,6 +65,27 @@ docker run -d --name nginx --hostname=nginx_net --ip 10.0.0.5  -p 80:80 -v ./ngi
 
 ![image](https://github.com/Harasisco/Dockarizing-Django-nginx-MySQL/assets/87074807/84bd4199-694d-4f8a-ab8f-970bbcab51e2)
 
+<p> You can check the network connectivity between nginx and Django by executing the django container and run the ``` ping ``` command </p>
+
+```shell
+$ docker exec -it <container ID> /bin/bash
+```
+```shell
+root@web_net:/code# ping nginx_net
+PING nginx_net (10.0.0.5) 56(84) bytes of data.
+64 bytes from nginx.test (10.0.0.5): icmp_seq=1 ttl=64 time=0.174 ms
+64 bytes from nginx.test (10.0.0.5): icmp_seq=2 ttl=64 time=0.066 ms
+64 bytes from nginx.test (10.0.0.5): icmp_seq=3 ttl=64 time=0.261 ms
+64 bytes from nginx.test (10.0.0.5): icmp_seq=4 ttl=64 time=0.063 ms
+64 bytes from nginx.test (10.0.0.5): icmp_seq=5 ttl=64 time=0.066 ms
+64 bytes from nginx.test (10.0.0.5): icmp_seq=6 ttl=64 time=0.066 ms
+64 bytes from nginx.test (10.0.0.5): icmp_seq=7 ttl=64 time=0.067 ms
+^C
+--- nginx_net ping statistics ---
+7 packets transmitted, 7 received, 0% packet loss, time 6119ms
+rtt min/avg/max/mdev = 0.063/0.109/0.261/0.072 ms
+
+```
 ### To check the MySQL connectivity:
 
   - Firstly execute the MySQL container using:
