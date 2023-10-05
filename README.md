@@ -65,7 +65,7 @@ docker run -d --name nginx --hostname=nginx_net --ip 10.0.0.5  -p 80:80 -v ./ngi
 
 ![image](https://github.com/Harasisco/Dockarizing-Django-nginx-MySQL/assets/87074807/84bd4199-694d-4f8a-ab8f-970bbcab51e2)
 
-<p> You can check the network connectivity between nginx and Django by executing the django container and run the ``` ping ``` command </p>
+<p> You can check the network connectivity between nginx and Django by executing the django container and run the ```ping``` command </p>
 
 ```shell
 $ docker exec -it <container ID> /bin/bash
