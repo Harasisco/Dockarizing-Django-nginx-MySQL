@@ -127,5 +127,5 @@ docker compose down
 
 ## Configuration
 - Django settings can be configured in the ./django/mysite/settings.py file.
-- MySQL configuration is set in the ./docker-compose.yml file under the db service section.
+- MySQL configuration is set in the ./django/.env file under the db service section.
 - Nginx configuration files can be added/modified in the ./nginx/conf.d/ directory.
