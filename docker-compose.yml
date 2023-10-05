@@ -5,6 +5,7 @@ services:
     build:
       context: ./django
     container_name: django_server
+    hostname: web_net
     command: sh -c "python3 wait_for_db.py && python3 ./mysite/manage.py runserver 0.0.0.0:8000"
     expose:
       - 8000
@@ -14,22 +15,45 @@ services:
       - "./django/.env"
     depends_on:
       - db
-
+    networks:
+      test:
+        ipv4_address: 10.0.0.10
+        
+        
   nginx:
     image: nginx:latest
     container_name: nginx_REVproxy
+    hostname: nginx_net
     ports:
       - 80:80
     volumes:
       - ./nginx/conf.d/:/etc/nginx/conf.d/
     depends_on:
       - web
-
+    networks:
+      test:
+        ipv4_address: 10.0.0.5
+  
+  
   db:
     image: mysql
     container_name: mysql_db
+    hostname: db_net
     volumes:
       - ./MySQL/data.sql:/docker-entrypoint-initdb.d/data.sql
     environment:
       - MYSQL_ROOT_PASSWORD=harasisco
       - MYSQL_DATABASE=my_database
+    networks:
+      test:
+        ipv4_address: 10.0.0.15
+        
+        
+        
+networks:
+  test:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.0.0.0/24
