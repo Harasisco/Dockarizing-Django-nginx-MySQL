@@ -5,7 +5,7 @@ services:
     build:
       context: ./django
     container_name: django_server
-    hostname: web_net
+    hostname: Django_server
     command: sh -c "python3 wait_for_db.py && python3 ./mysite/manage.py runserver 0.0.0.0:8000"
     expose:
       - 8000
@@ -23,7 +23,7 @@ services:
   nginx:
     image: nginx:latest
     container_name: nginx_REVproxy
-    hostname: nginx_net
+    hostname: nginx_REVproxy
     ports:
       - 80:80
     volumes:
@@ -38,7 +38,7 @@ services:
   db:
     image: mysql
     container_name: mysql_db
-    hostname: db_net
+    hostname: MySQL
     volumes:
       - ./MySQL/data.sql:/docker-entrypoint-initdb.d/data.sql
     environment:
